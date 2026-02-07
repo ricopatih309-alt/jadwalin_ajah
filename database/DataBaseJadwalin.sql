@@ -1,5 +1,38 @@
 create database Jadwalin_Ajah
 
+-- Table Tugas Minggu ini
+CREATE TABLE tasks (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  subject VARCHAR(100) NOT NULL,
+  deadline VARCHAR(50) NOT NULL,
+  note TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Values Table Tugas Minggu ini
+INSERT INTO tasks (subject, deadline, note) VALUES 
+('Teknik Pemrog Terstruktur', 'Kamis (06/02)', 'Vclass Kuis/Forum M13'),
+('Teknik Pemrog Terstruktur', 'Kamis (29/01)', 'Presentasi Project Website'),
+('Matematika Lanjut 1', 'Selasa (04/02)', 'Vclass Latihan Soal UU tambahan nilai'),
+('Sistem Basis Data', 'Kamis (28/01)', 'Vclass Kuis M13/M14');
+
+-- Table Pengumuman Terbaru
+CREATE TABLE announcements (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  subject VARCHAR(100) NOT NULL,
+  date VARCHAR(50) NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Values Table Pengumuman Terbaru
+INSERT INTO announcements (subject, date, content) VALUES 
+('Teknik Pemrog Terstruktur', 'Kamis (06/02)', 'Vclass Kuis/Forum M13'),
+('Teknik Pemrog Terstruktur', 'Kamis (29/01)', 'Presentasi Project Website'),
+('Matematika Lanjut 1', 'Selasa (04/02)', 'Vclass Latihan Soal UU tambahan nilai'),
+('Sistem Basis Data', 'Kamis (28/01)', 'Vclass Kuis M13/M14');
+
+
 -- Table Jadwal Perkuliahan
 CREATE TABLE schedules (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -9,8 +42,7 @@ CREATE TABLE schedules (
   subject VARCHAR(100),
   room VARCHAR(50),
   lecturer VARCHAR(100),
-  sks INT
-);
+  sks INT);
 
 -- Values Table Jadwal Perkuliahan
 INSERT INTO schedules (day, time, code, subject, room, lecturer, sks)
@@ -24,43 +56,6 @@ VALUES
 ('Kamis','07:30 - 09:30','MAT09','Matematika Sistem Informasi','Ruang E316','Dosen Ira Diana Solihati',2),
 ('Kamis','09:30 - 11:30','IT055','Teknik Pemrog Terstruktur', 'Ruang E316','Dosen Dina Agusten',3),
 ('Jumat','08:00 - 11:00','LAB01','Praktikum Komputasi Big Data','ONLINE','Team Teaching',1);
-
--- Table Tugas Minggu ini
-CREATE TABLE tasks (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  subject VARCHAR(100) NOT NULL,
-  deadline VARCHAR(50) NOT NULL,
-  note TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Values Table Tugas Minggu ini
-INSERT INTO tasks (subject, deadline, note) VALUES 
-('Teknik Pemrog Terstruktur', 'Kamis (15/01)', 'Presentasi Project Website'),
-('Mat Lanjut', 'Jumat (16/01)', 'Bab 5 - Integral'),
-('Peng Org & Ars Komp', 'Senin (19/01)', 'Tugas Rancangan CPU'),
-('Komputasi Big Data', 'Selasa (20/01)', 'Analisis Dataset Kaggle'),
-('Sistem Basis Data', 'Rabu (21/01)', 'Normalisasi Database'),
-('Mat Sisfor', 'Kamis (22/01)', 'Latihan Logika Fuzzy');
-
-
--- Table Pengumuman Terbaru
-CREATE TABLE announcements (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  subject VARCHAR(100) NOT NULL,
-  date VARCHAR(50) NOT NULL,
-  content TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Values Table Pengumuman Terbaru
-INSERT INTO announcements (subject, date, content) VALUES 
-('Bahasa Inggris', 'Rabu (M12)', 'Skill Structure 11-20 S. Kuis Reading Test 50 soal. Harap membawa kamus.'),
-('Teknik Pemrog Terstruktur', 'Kamis (15/01)', 'Presentasi Project Website akan dilakukan secara urut absen. Siapkan demo lokal.'),
-('Praktikum LepKom Setelah UTS', 'Kamis (08/01)', 'Jadwal Praktikum LepKom M8 bergeser ke Lab 3 karena pemeliharaan jaringan.'),
-('Matematika Sistem Informasi', 'Kamis (08/01)', 'Perkuliahan dilakukan secara Luring di Ruang 405.'),
-('Teknik Pemrog Terstruktur', 'Kamis (08/01)', 'Kelas pengganti dilaksanakan secara Daring via VClass.'),
-('Struktur Basis Data', 'Selasa (13/01)', 'Pembagian Nilai UTS dan evaluasi hasil proyek semester.');
 
 -- Table Anggota Kelas
 create table students (
