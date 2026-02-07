@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import SystemBanner from './components/SystemBanner';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Section from './components/Section';
 import Footer from './components/Footer';
 import AnnouncementPage from './components/AnnouncementPage';
 import CalendarPage from './components/CalendarPage';

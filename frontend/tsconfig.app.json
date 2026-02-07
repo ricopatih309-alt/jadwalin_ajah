@@ -2,8 +2,8 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2022",
-    "useDefineForClassFields": false,       // sesuai proyek lama
-    "experimentalDecorators": true,         // kalau masih pakai decorators
+    "useDefineForClassFields": false,       
+    "experimentalDecorators": true,         
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "types": ["vite/client", "node"],

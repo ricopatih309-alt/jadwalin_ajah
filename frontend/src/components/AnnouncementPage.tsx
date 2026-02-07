@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import type { Task, Announcement } from '../types/types';
 import { X, Calendar, Clock, AlertCircle, Search, ChevronDown } from 'lucide-react';
 
-// Helper Component for Highlighting Text
 const HighlightText = ({ text, highlight }: { text: string; highlight: string }) => {
   if (!highlight.trim()) return <>{text}</>;
   
@@ -35,7 +34,6 @@ const AnnouncementPage: React.FC = () => {
     const fetchData = async () => {
       try {
         setloading(true);
-        // Ganti URL ini dengan URL API Backend kamu (misal Express.js)
         const resTasks = await fetch('http://localhost:3001/api/tasks');
         const resAnnounce = await fetch('http://localhost:3001/api/announcements');
         
@@ -45,7 +43,7 @@ const AnnouncementPage: React.FC = () => {
         setTasksData(tasks);
         setAnnouncementsData(announcements);
       } catch (error) {
-        console.error("Gagal mengambil data:", error);
+        console.error("Data tidak terbaca", error);
       } finally {
         setloading(false);
       }
@@ -96,7 +94,7 @@ const AnnouncementPage: React.FC = () => {
       </h1>
 
       {/* Sticky Search Bar */}
-      <div className="sticky top-24 z-30 mb-10 animate-fade-in-down" style={{ animationDelay: '50ms' }}>
+      <div className="sticky top-31 z-30 mb-10 animate-fade-in-down" style={{ animationDelay: '50ms' }}>
         <div className="relative group">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <Search className="h-5 w-5 text-gray-400 group-focus-within:text-brand-blue transition-colors" />

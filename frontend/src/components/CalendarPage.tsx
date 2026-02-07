@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import type { CalendarEvent } from '../types/types';
 import { Clock} from 'lucide-react';
 
-// Helper to get color styles based on variant
 const getVariantStyles = (variant: string) => {
   switch (variant) {
     case 'pink':
@@ -48,7 +47,6 @@ const getVariantStyles = (variant: string) => {
   }
 };
 
-// Helper to parse sortDate into display parts
 const getDateParts = (dateString?: string) => {
   if (!dateString) return { month: '???', day: '?' };
   const date = new Date(dateString);
@@ -99,7 +97,6 @@ const CalendarPage: React.FC = () => {
 
         {events.map((event, index) => {
           const styles = getVariantStyles(event.variant || 'blue-outline');
-          // Karena dari SQL sort_date berbentuk string ISO, kita parse dulu
           const { month, day } = getDateParts(event.sort_date as unknown as string);
 
         return (

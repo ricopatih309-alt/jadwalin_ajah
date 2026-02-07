@@ -1,6 +1,8 @@
 import React from 'react';
 import * as motion from "motion/react-client"
+import RotatingText from "./RotatingText";
 
+ 
 interface HeroProps {
   onNavigate: (page: string) => void;
 }
@@ -16,24 +18,26 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   return (
     <div className="min-h-[80vh] flex flex-col justify-center items-center text-center px-4 max-w-5xl mx-auto">
       
-      {/* Main Title dengan Animasi Framer Motion */}
+      {/*Headline*/}
       <motion.h1 
         className="text-6xl md:text-8xl font-black tracking-tighter mb-6 animated-gradient-text cursor-default inline-block"
         style={{ letterSpacing: '-2px' }}
-        // Animasi muncul dari bawah ke atas
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onHoverStart={() => console.log('hover started!')}
-      >
+        onHoverStart={() => console.log('hover started!')}>
+
         JADWALIN AJAH
       </motion.h1>
       
-      {/* Sub-headline */}
-      <p 
-        className="text-xl md:text-2xl text-black/70 font-normal mb-12 animate-fade-in-up max-w-2xl"
-        style={{ textShadow: '0px 2px 5px rgba(255,255,255,0.2)' }}
-      >
-        Jadwal, Materi, dan Info Kelas dalam Genggaman
+      {/*Sub Headline*/}
+      <p className="text-xl md:text-2xl text-black/70 font-normal mb-12 flex gap-2 justify-center items-center">
+        <RotatingText
+        texts={["Jadwal", "Materi", "Informasi"]}
+        rotationInterval={2000}
+        staggerDuration={0}
+         mainClassName="font-semibold text-black"
+        />
+        <span>Kelas dalam Genggaman</span>
       </p>
 
       {/* Professional CTA Button */}
@@ -53,7 +57,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           Made by
         </p>
         <p className="text-xs tracking-[0.3em] uppercase text-black font-bold">
-          KELOMPOK 7
+          KELOMPOK 6
         </p>
       </div>
     </div>
