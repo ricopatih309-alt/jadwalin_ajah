@@ -9,9 +9,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const handleStartClick = () => {
-    // Smooth scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Navigate to announcements page
     onNavigate('pengumuman');
   };
 
@@ -40,7 +38,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         <span>Kelas dalam Genggaman</span>
       </p>
 
-      {/* Professional CTA Button */}
+      {/* CTA Button */}
       <button 
         id="btn-start"
         data-target="pengumuman"
@@ -51,13 +49,12 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         Langsung Ajah
       </button>
 
-      {/* Minimalist Credit Footer */}
       <div className="flex flex-col items-center gap-2 animate-fade-in-up opacity-0" style={{ animationDelay: '200ms' }}>
-        <p className="text-[10px] tracking-[0.3em] uppercase text-black/50 font-medium">
-          Made by
+        <p className="text-[13px] tracking-[0.3em] uppercase text-black/50 font-medium">
+          Made for
         </p>
         <p className="text-xs tracking-[0.3em] uppercase text-black font-bold">
-          KELOMPOK 6
+          2KA19
         </p>
       </div>
     </div>
