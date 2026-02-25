@@ -173,7 +173,7 @@ const AnnouncementPage: React.FC = () => {
         </div>
       )}
 
-      {/* SECTION 2: PENGUMUMAN TERBARU (Yellow Theme) */}
+      {/* SECTION 2: PENGUMUMAN TERBARU*/}
       {showAnnouncements && (
         <div className="rounded-2xl overflow-hidden shadow-xl glass border-2 border-yellow-200 animate-fade-in-up" style={{ animationDelay: showTasks ? '400ms' : '100ms' }}>
           <div className="bg-brand-blue/90 py-4 px-6 backdrop-blur-sm flex items-center gap-2">

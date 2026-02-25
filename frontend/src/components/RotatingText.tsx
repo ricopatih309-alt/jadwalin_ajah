@@ -1,25 +1,9 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useState
-} from 'react';
-import {
-  motion,
-  AnimatePresence,
-  type Transition,
-  type VariantLabels,
-  type Target,
-  type TargetAndTransition
-} from 'motion/react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState} from 'react';
+import { motion, AnimatePresence, type Transition, type VariantLabels, type Target, type TargetAndTransition} from 'motion/react';
 
 function cn(...classes: (string | undefined | null | boolean)[]) {
-  return classes.filter(Boolean).join(' ');
-}
+  return classes.filter(Boolean).join(' ');}
 
-/* ================= REF API ================= */
 export interface RotatingTextRef {
   next: () => void;
   previous: () => void;
@@ -27,7 +11,6 @@ export interface RotatingTextRef {
   reset: () => void;
 }
 
-/* ================= PROPS ================= */
 export interface RotatingTextProps
   extends Omit<
     React.ComponentPropsWithoutRef<typeof motion.span>,
@@ -45,7 +28,6 @@ export interface RotatingTextProps
   mainClassName?: string;
 }
 
-/* ================= COMPONENT ================= */
 const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
   (
     {
@@ -65,7 +47,7 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
   ) => {
     const [index, setIndex] = useState(0);
 
-    /* ===== Helpers ===== */
+    
     const next = useCallback(() => {
       setIndex(i => (i === texts.length - 1 ? (loop ? 0 : i) : i + 1));
     }, [texts.length, loop]);
@@ -83,7 +65,7 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
 
     const reset = useCallback(() => setIndex(0), []);
 
-    /* ===== Expose Ref API ===== */
+    
     useImperativeHandle(
       ref,
       () => ({
@@ -95,7 +77,6 @@ const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
       [next, previous, jumpTo, reset]
     );
 
-    /* ===== Auto rotation ===== */
     useEffect(() => {
       if (!auto) return;
       const id = setInterval(next, rotationInterval);

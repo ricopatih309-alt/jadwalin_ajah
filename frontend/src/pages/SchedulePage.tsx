@@ -13,7 +13,6 @@ useEffect(() => {
 }, []);
 
 
-  // Logic: Day Mapping for Sorting
   const dayOrder: { [key: string]: number } = {
     "Senin": 1,
     "Selasa": 2,

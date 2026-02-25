@@ -30,11 +30,11 @@ export interface Announcement {
 
 export interface CalendarEvent {
   id: number;
-  category?: string; // To display the pill tag
-  variant?: 'pink' | 'yellow' | 'blue-solid' | 'blue-outline'; // For styling
+  category?: string; 
+  variant?: 'pink' | 'yellow' | 'blue-solid' | 'blue-outline'; 
   title: string;
   date_range: string;
-  sort_date?: string; // ISO date string for sorting (e.g., '2025-09-22')
+  sort_date?: string;
   url?: string;
 }
 
@@ -60,7 +60,7 @@ export interface Schedule {
   id: number;
   day: string;
   time: string;
-  code: string; // Course Code
+  code: string;
   subject: string;
   room: string;
   lecturer: string;
@@ -69,10 +69,10 @@ export interface Schedule {
 
 export interface Materi {
   id: number;
-  subject_id: string; // Sesuai kolom di tabel 'materi'
-  meeting: number;    // Sesuai kolom di tabel 'materi'
+  subject_id: string; 
+  meeting: number;   
   title: string;
-  url: string;        // Ganti 'filename' jadi 'url' sesuai SQL kamu
+  url: string;       
 }
 
 export interface Subject {
@@ -81,7 +81,6 @@ export interface Subject {
   lecturer: string;
   code: string;     
   sks: number;
-  // Properti opsional untuk keperluan UI
   materialCount?: number; 
   accentColor?: string; 
 }
