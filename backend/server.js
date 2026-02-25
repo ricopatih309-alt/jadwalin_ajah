@@ -87,7 +87,6 @@ app.get('/api/subjects/:id/materi', (req, res) => {
   );
 });
 
-app.listen(3001, () => {
-  console.log('Backend running di http://localhost:3001');
+app.listen(3001, "0.0.0.0", () => {
+  console.log("Server running on port 3001");
 });
-
