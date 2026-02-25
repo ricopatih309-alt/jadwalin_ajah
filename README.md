@@ -1,7 +1,3 @@
-<div align="center">
-  <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
 <h1 align="center">Jadwalin Ajah</h1>
 <p align="center">
 Website manajemen jadwal perkuliahan untuk membantu mahasiswa mengakses informasi akademik secara cepat, terstruktur, dan terpusat.
