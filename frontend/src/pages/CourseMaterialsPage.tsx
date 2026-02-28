@@ -14,7 +14,7 @@ const CourseMaterialsPage: React.FC = () => {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/daftar_matkul');
+        const res = await fetch('/api/daftar_matkul.php');
         const data = await res.json();
         setSubjects(data);
       } catch (error) {
@@ -33,7 +33,7 @@ const CourseMaterialsPage: React.FC = () => {
     setSearchQuery(''); // Reset search saat ganti matkul
 
     try {
-      const res = await fetch(`http://localhost:3001/api/subjects/${subject.id}/materi`);
+      const res = await fetch(`/api/materi.php?subject_id=${subject.id}`);
       const data = await res.json();
       setMaterials(data);
     } catch (error) {

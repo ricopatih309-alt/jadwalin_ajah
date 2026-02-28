@@ -62,7 +62,7 @@ const CalendarPage: React.FC = () => {
   useEffect(() => {
     const fetchCalendar = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/calendar');
+        const res = await fetch('/api/calendar.php');
         const data = await res.json();
         setEvents(data);
       } catch (error) {

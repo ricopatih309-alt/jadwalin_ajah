@@ -14,7 +14,7 @@ const MembersPage: React.FC = () => {
     const fetchStudents = async () => {
       try {
         // Sesuaikan port 3001 dengan port backend kamu
-        const res = await fetch('http://localhost:3001/api/students'); 
+        const res = await fetch('/api/students.php');
         const data: Student[] = await res.json();
 
         setStudents(data);

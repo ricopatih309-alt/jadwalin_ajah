@@ -6,7 +6,7 @@ const SchedulePage: React.FC = () => {
 const [schedules, setSchedules] = useState<Schedule[]>([]);
 
 useEffect(() => {
-  fetch('http://localhost:3001/api/schedules')
+  fetch('/api/schedules.php')
     .then(res => res.json())
     .then(data => setSchedules(data))
     .catch(err => console.error(err));

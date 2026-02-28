@@ -34,8 +34,8 @@ const AnnouncementPage: React.FC = () => {
     const fetchData = async () => {
       try {
         setloading(true);
-        const resTasks = await fetch('http://localhost:3001/api/tasks');
-        const resAnnounce = await fetch('http://localhost:3001/api/announcements');
+        const resTasks = await fetch('/api/tasks.php');
+        const resAnnounce = await fetch('/api/announcements.php');
         
         const tasks = await resTasks.json();
         const announcements = await resAnnounce.json();
