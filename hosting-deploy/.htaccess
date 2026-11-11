@@ -1,0 +1,16 @@
+Options -Indexes
+
+<FilesMatch "^(\.env(\..*)?|db\.php|env\.php|router\.php)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    RewriteRule ^api/admin/login/?$ api/admin/login.php [QSA,NC,L]
+
+    RewriteCond %{REQUEST_URI} !^/api(?:/|$) [NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.html [L]
+</IfModule>

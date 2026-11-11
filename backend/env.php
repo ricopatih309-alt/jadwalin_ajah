@@ -1,7 +1,10 @@
 <?php
 function loadProjectEnvironment(): void
 {
-    $envFile = dirname(__DIR__) . '/.env';
+    $envFile = __DIR__ . '/.env';
+    if (!is_file($envFile)) {
+        $envFile = dirname(__DIR__) . '/.env';
+    }
     if (!is_file($envFile)) {
         return;
     }
