@@ -33,7 +33,7 @@ const CourseMaterialsPage: React.FC = () => {
     setSearchQuery(''); // Reset search saat ganti matkul
 
     try {
-      const res = await fetch(`/api/materi.php?subject_id=${subject.id}`);
+      const res = await fetch(`/api/materi.php?subject_id=${encodeURIComponent(subject.subject_id)}`);
       const data = await res.json();
       setMaterials(data);
     } catch (error) {
@@ -62,7 +62,7 @@ const CourseMaterialsPage: React.FC = () => {
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
          {subjects.map((subject) => (
            <div 
-             key={subject.id}
+             key={subject.subject_id}
              className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 flex flex-col items-center text-center group"
            >
               <h3 className="text-lg font-bold text-brand-blue mb-1 group-hover:text-brand-purple transition-colors">

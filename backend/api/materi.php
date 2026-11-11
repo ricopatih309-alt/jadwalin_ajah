@@ -13,7 +13,7 @@ if (!isset($_GET['subject_id']) || empty($_GET['subject_id'])) {
 $subject_id = $_GET['subject_id'];
 
 $data = fetchData(
-    "SELECT * FROM materi WHERE subject_id = ? ORDER BY meeting ASC",
+    "SELECT * FROM Materi_Kuliah WHERE subject_id = ? ORDER BY meeting ASC",
     [$subject_id],
     's'
 );

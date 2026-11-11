@@ -14,7 +14,8 @@ export interface ContactInfo {
 
 export interface Task {
   id: number;
-  subject: string;
+  subject_id: string;
+  subject_name: string;
   deadline: string;
   note: string;
   created_at?: string;
@@ -58,6 +59,7 @@ export interface Student {
 
 export interface Schedule {
   id: number;
+  subject_id: string;
   day: string;
   time: string;
   code: string;
@@ -76,7 +78,7 @@ export interface Materi {
 }
 
 export interface Subject {
-  id: string;         
+  subject_id: string;
   name: string;
   lecturer: string;
   code: string;     

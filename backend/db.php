@@ -1,22 +1,28 @@
 <?php
 // db.php - Database Connection Configuration
 
-$isLocal = ($_SERVER['SERVER_NAME'] === 'localhost');
+require_once __DIR__ . '/env.php';
+loadProjectEnvironment();
 
-if ($isLocal) {
-    define('DB_HOST', 'localhost');
-    define('DB_USER', 'root');
-    define('DB_PASS', 'Rico10124173');
-    define('DB_NAME', 'Jadwalin_Ajah');
+$isLocal = ($_SERVER['SERVER_NAME'] === 'localhost');
+$useRemote = (getenv('DB_CONNECTION') === 'remote');
+
+if ($isLocal && !$useRemote) {
+    define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
+    define('DB_PORT', (int) (getenv('DB_PORT') ?: 3306));
+    define('DB_USER', getenv('DB_USER') ?: 'root');
+    define('DB_PASS', getenv('DB_PASSWORD') ?: 'Rico10124173');
+    define('DB_NAME', getenv('DB_NAME') ?: 'Jadwalin_Ajah');
 } else {
-    define('DB_HOST', 'localhost');
-    define('DB_USER', 'Rico_2KA19');
-    define('DB_PASS', 'Rico123.@!');
-    define('DB_NAME', 'Rico_2KA19_DB');
+    define('DB_HOST', getenv('DB_HOST') ?: '103.93.163.197');
+    define('DB_PORT', (int) (getenv('DB_PORT') ?: 12095));
+    define('DB_USER', getenv('DB_USER') ?: 'Rico_2KA19');
+    define('DB_PASS', getenv('DB_PASSWORD') ?: 'Rico123.@!');
+    define('DB_NAME', getenv('DB_NAME') ?: 'Rico_2KA19_DB');
 }
 
 // Create connection
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
 // Check connection
 if ($conn->connect_error) {

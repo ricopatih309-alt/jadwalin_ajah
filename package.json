@@ -5,10 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run dev-frontend\" \"npm run dev-backend\"",
+    "dev-remote": "DB_CONNECTION=remote npm run dev",
     "dev-frontend": "cd frontend && npm run dev",
-    "dev-backend": "php -S localhost:8000 -t backend"
+    "dev-backend": "php -d extension=mysqli -S localhost:8000 -t backend backend/router.php",
+    "create-admin": "node backend/createAdmin.js"
   },
   "devDependencies": {
     "concurrently": "^9.1.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "mysql2": "^3.24.6",
+    "prompts": "^2.4.2"
   }
 }

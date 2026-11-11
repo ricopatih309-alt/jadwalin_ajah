@@ -37,6 +37,10 @@ const AnnouncementPage: React.FC = () => {
         const resTasks = await fetch('/api/tasks.php');
         const resAnnounce = await fetch('/api/announcements.php');
         
+        if (!resTasks.ok || !resAnnounce.ok) {
+          throw new Error('Gagal memuat data');
+        }
+
         const tasks = await resTasks.json();
         const announcements = await resAnnounce.json();
 
@@ -62,7 +66,7 @@ const AnnouncementPage: React.FC = () => {
 
   // Filter Logic - Extended to include dates/deadlines
   const filteredTasks = tasksData.filter(task => 
-    task.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    task.subject_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     task.note.toLowerCase().includes(searchQuery.toLowerCase()) ||
     (task.deadline && task.deadline.toLowerCase().includes(searchQuery.toLowerCase()))
   );
@@ -75,8 +79,8 @@ const AnnouncementPage: React.FC = () => {
 
   const isSearching = searchQuery.trim().length > 0;
   const noResults = isSearching && filteredTasks.length === 0 && filteredAnnouncements.length === 0;
-  const showTasks = filteredTasks.length > 0;
-  const showAnnouncements = filteredAnnouncements.length > 0;
+  const showTasks = filteredTasks.length > 0 || (!isSearching && tasksData.length === 0);
+  const showAnnouncements = filteredAnnouncements.length > 0 || (!isSearching && announcementsData.length === 0);
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen text-brand-blue font-bold">
@@ -154,7 +158,7 @@ const AnnouncementPage: React.FC = () => {
                   style={{ animationDelay: `${150 + index * 50}ms` }}
                 >
                   <h3 className="text-brand-blue font-bold text-lg mb-2 group-hover:text-brand-purple transition-colors">
-                    <HighlightText text={task.subject} highlight={searchQuery} />
+                    <HighlightText text={task.subject_name} highlight={searchQuery} />
                   </h3>
                   <div className="text-slate-600 text-sm space-y-1">
                     <p><span className="font-semibold text-slate-500">Deadline:</span> {task.deadline}</p>
@@ -167,7 +171,7 @@ const AnnouncementPage: React.FC = () => {
             </div>
           ) : (
             <div className="p-8 text-center text-slate-500 italic">
-              Tidak ada tugas aktif saat ini.
+              Tidak ada tugas saat ini.
             </div>
           )}
         </div>
@@ -248,7 +252,7 @@ const AnnouncementPage: React.FC = () => {
             <div className="p-6 bg-pink-100/80">
               <div className="flex justify-between items-start">
                 <h3 className="text-2xl font-bold text-slate-800 pr-8">
-                  {selectedTask.subject}
+                  {selectedTask.subject_name}
                 </h3>
                 <button onClick={closeModal} className="p-1 hover:bg-black/5 rounded-full transition-colors">
                   <X size={24} className="text-slate-500" />

@@ -32,3 +32,12 @@ Website ini membantu:
 - Gemini API
 
 ---
+
+## Admin Dashboard
+
+1. Buat `.env` di root project dan isi `DB_CONNECTION=remote`, `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, dan `DB_NAME` sesuai database hosting.
+2. Buat secret JWT dengan `openssl rand -hex 32`, lalu simpan hasilnya pada `JWT_SECRET` di `.env`.
+3. Jalankan `npm run create-admin` untuk membuat akun admin. Password diminta secara tersembunyi dan disimpan sebagai bcrypt hash.
+4. Jalankan `npm run dev-remote`, lalu buka `/admin/login`.
+
+Route dashboard `/admin` tidak ditampilkan di navbar publik. Dashboard menyediakan CRUD terproteksi JWT untuk schedules, tasks, announcements, kalender akademik, students, dan materi. Semua endpoint admin memerlukan header `Authorization: Bearer <token>`. Form Tasks/Materi memakai dropdown mata kuliah dari schedules dan mengirim `subject_id`; data GET materi juga difilter berdasarkan mata kuliah terpilih.
