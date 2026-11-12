@@ -40,6 +40,7 @@ const Navbar: React.FC = () => {
     { label: 'Anggota Kelas', path: '/anggota' },
     { label: 'Jadwal Kuliah', path: '/jadwal' },
     { label: 'Daftar Mata Kuliah', path: '/materi' },
+    { label: 'Upload Tugas', path: '/upload-tugas' },
   ];
 
   return (

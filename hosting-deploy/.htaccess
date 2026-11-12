@@ -7,6 +7,8 @@ Options -Indexes
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    RewriteRule ^vendor(?:/|$) - [F,L]
+    RewriteRule ^credentials\.json$ - [F,L,NC]
     RewriteRule ^api/admin/login/?$ api/admin/login.php [QSA,NC,L]
 
     RewriteCond %{REQUEST_URI} !^/api(?:/|$) [NC]

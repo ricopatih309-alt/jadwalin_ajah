@@ -41,3 +41,11 @@ Website ini membantu:
 4. Jalankan `npm run dev-remote`, lalu buka `/admin/login`.
 
 Route dashboard `/admin` tidak ditampilkan di navbar publik. Dashboard menyediakan CRUD terproteksi JWT untuk schedules, tasks, announcements, kalender akademik, students, dan materi. Semua endpoint admin memerlukan header `Authorization: Bearer <token>`. Form Tasks/Materi memakai dropdown mata kuliah dari schedules dan mengirim `subject_id`; data GET materi juga difilter berdasarkan mata kuliah terpilih.
+
+## Upload Tugas
+
+Backend memakai Google API PHP Client. Install dependensinya dengan `composer require google/apiclient --working-dir=backend`.
+
+Set `ROOT_FOLDER_ID` dan `GOOGLE_CREDENTIALS_PATH` di `.env`. Simpan file Service Account di luar web root; path yang diberikan ke `GOOGLE_CREDENTIALS_PATH` harus absolut. Bagikan folder Drive tujuan kepada email Service Account sebagai Editor.
+
+Form publik tersedia di `/#/upload-tugas`. Upload dibatasi 20 MB dan file dibagikan sebagai public reader agar `webViewLink` dapat dibuka penerima.

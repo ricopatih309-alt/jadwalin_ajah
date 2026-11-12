@@ -51,6 +51,7 @@ export interface CalendarCategory {
 export type StudentStatus = 'Aktif' | 'Cuti' | 'Non-Aktif';
 
 export interface Student {
+  id: number;
   npm: string;
   name: string;
   status: StudentStatus;

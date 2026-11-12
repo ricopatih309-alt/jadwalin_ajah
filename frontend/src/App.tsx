@@ -11,6 +11,7 @@ import CourseMaterialsPage from './pages/CourseMaterialsPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import ProtectedAdminRoute from './components/ProtectedAdminRoute';
+import UploadTugasForm from './components/UploadTugasForm';
 
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
@@ -46,6 +47,7 @@ const App: React.FC = () => {
         <Route path="/anggota" element={<MembersPage />} />
         <Route path="/jadwal" element={<SchedulePage />} />
         <Route path="/materi" element={<CourseMaterialsPage />} />
+        <Route path="/upload-tugas" element={<UploadTugasForm />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
