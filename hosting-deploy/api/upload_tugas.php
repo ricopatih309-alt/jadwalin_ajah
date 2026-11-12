@@ -110,10 +110,12 @@ if ($taskType === 'Individu') {
     }
 }
 
-$credentialsPath = getenv('GOOGLE_CREDENTIALS_PATH') ?: getenv('GOOGLE_APPLICATION_CREDENTIALS');
+$oauthClientId = getenv('GOOGLE_OAUTH_CLIENT_ID');
+$oauthClientSecret = getenv('GOOGLE_OAUTH_CLIENT_SECRET');
+$oauthRefreshToken = getenv('GOOGLE_OAUTH_REFRESH_TOKEN');
 $rootFolderId = getenv('ROOT_FOLDER_ID');
-if (!$credentialsPath || !is_file($credentialsPath) || !$rootFolderId) {
-    uploadJsonResponse(['error' => 'Konfigurasi Google Drive belum lengkap. Atur GOOGLE_CREDENTIALS_PATH dan ROOT_FOLDER_ID di .env.'], 503);
+if (!$oauthClientId || !$oauthClientSecret || !$oauthRefreshToken || !$rootFolderId) {
+    uploadJsonResponse(['error' => 'Konfigurasi Google OAuth belum lengkap. Atur GOOGLE_OAUTH_CLIENT_ID, GOOGLE_OAUTH_CLIENT_SECRET, GOOGLE_OAUTH_REFRESH_TOKEN, dan ROOT_FOLDER_ID di .env.'], 503);
 }
 
 $autoloadPath = dirname(__DIR__) . '/vendor/autoload.php';
@@ -157,8 +159,14 @@ $driveFileId = null;
 try {
     $client = new Google\Client();
     $client->setApplicationName('Jadwalin Ajah Task Upload');
-    $client->setAuthConfig($credentialsPath);
+    $client->setClientId($oauthClientId);
+    $client->setClientSecret($oauthClientSecret);
     $client->setScopes([Google\Service\Drive::DRIVE]);
+    $token = $client->fetchAccessTokenWithRefreshToken($oauthRefreshToken);
+    if (isset($token['error'])) {
+        throw new RuntimeException('Google OAuth token refresh failed: ' . ($token['error_description'] ?? $token['error']));
+    }
+    $client->setAccessToken($token);
     $driveService = new Google\Service\Drive($client);
 
     $subjectFolderId = findOrCreateFolder($driveService, $subjectName, $rootFolderId);
@@ -220,6 +228,24 @@ try {
         }
     }
     error_log('Task upload failed: ' . $error->getMessage());
-    uploadJsonResponse(['error' => 'Upload gagal diproses. Pastikan Google Drive dapat diakses lalu coba lagi.'], 500);
+    $userMessage = 'Upload gagal diproses. Pastikan Google Drive dapat diakses lalu coba lagi.';
+    if ($error instanceof Google\Service\Exception) {
+        foreach ($error->getErrors() as $apiError) {
+            $reason = $apiError['reason'] ?? '';
+            if ($reason === 'accessNotConfigured') {
+                $userMessage = 'Google Drive API belum diaktifkan pada Google Cloud project OAuth. Aktifkan Drive API lalu coba lagi.';
+                break;
+            }
+            if ($reason === 'storageQuotaExceeded') {
+                $userMessage = 'Kuota penyimpanan Google Drive akun yang terhubung sudah penuh.';
+                break;
+            }
+            if ($reason === 'insufficientFilePermissions' || $reason === 'notFound') {
+                $userMessage = 'Akun Google yang terhubung tidak memiliki akses ke ROOT_FOLDER_ID. Pastikan folder dibagikan ke akun tersebut.';
+                break;
+            }
+        }
+    }
+    uploadJsonResponse(['error' => $userMessage], 500);
 }
 ?>

@@ -46,6 +46,8 @@ Route dashboard `/admin` tidak ditampilkan di navbar publik. Dashboard menyediak
 
 Backend memakai Google API PHP Client. Install dependensinya dengan `composer require google/apiclient --working-dir=backend`.
 
-Set `ROOT_FOLDER_ID` dan `GOOGLE_CREDENTIALS_PATH` di `.env`. Simpan file Service Account di luar web root; path yang diberikan ke `GOOGLE_CREDENTIALS_PATH` harus absolut. Bagikan folder Drive tujuan kepada email Service Account sebagai Editor.
+Upload tugas memakai OAuth 2.0 atas nama akun Gmail pribadi. Aktifkan Google Drive API, siapkan OAuth consent screen dan OAuth Client ID/Secret. Untuk membuat refresh token, tambahkan redirect URI `https://developers.google.com/oauthplayground` pada OAuth Client, buka Google OAuth Playground, aktifkan opsi "Use your own OAuth credentials", lalu otorisasi scope `https://www.googleapis.com/auth/drive` dan tukarkan authorization code dengan token. Simpan `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET`, `GOOGLE_OAUTH_REFRESH_TOKEN`, dan `ROOT_FOLDER_ID` pada `.env`. Jangan kirim atau commit nilai-nilai tersebut.
+
+Gunakan folder Drive yang dimiliki atau dapat diedit oleh akun Gmail yang diotorisasi. Jika OAuth consent screen berstatus Testing, Google dapat membuat refresh token kedaluwarsa setelah 7 hari; untuk pemakaian terus-menerus, atur consent screen sesuai status produksi Google.
 
 Form publik tersedia di `/#/upload-tugas`. Upload dibatasi 20 MB dan file dibagikan sebagai public reader agar `webViewLink` dapat dibuka penerima.
